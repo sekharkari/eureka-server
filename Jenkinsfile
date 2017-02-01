@@ -14,4 +14,8 @@ node {
    stage 'Build'
    // Run the maven build
    sh "${mvnHome}/bin/mvn clean install"
+   
+   //CF push
+   stage 'Deploy Dev'
+   sh 'cf push vkari-eureka -p ./target/account-service-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M'
 }
