@@ -14,8 +14,20 @@ node {
    stage 'Build'
    // Run the maven build
    sh "${mvnHome}/bin/mvn clean install"
+   archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+   stash includes: '**/target/*.jar', name: 'app' 
    
+   stage 'Deploy to Cloudfoundry'
    //CF push
-   stage 'Deploy Dev'
-   sh 'cf push vkari-eureka -p ./target/account-service-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M'
+     wrap([$class: 'CloudFoundryCliBuildWrapper',
+        cloudFoundryCliVersion: 'Cloud Foundry CLI (built-in)',
+        apiEndpoint: 'https://api.ng.bluemix.net',
+        skipSslValidation: true,
+        credentialsId: 'cloud-foundry-elastic-runtime-credentials',
+        organization: 'vkari',
+        space: 'dev']) {
+		unstash 'app'
+        sh 'cf push vkari-eureka -p target/eureka-server-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M'
+    }
+   
 }
