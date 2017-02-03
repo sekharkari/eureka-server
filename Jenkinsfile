@@ -19,15 +19,5 @@ node {
    
    stage 'Deploy to Cloudfoundry'
    //CF push
-     wrap([$class: 'CloudFoundryCliBuildWrapper',
-        cloudFoundryCliVersion: 'Cloud Foundry CLI (built-in)',
-        apiEndpoint: 'https://api.ng.bluemix.net',
-        skipSslValidation: true,
-        credentialsId: 'cloud-foundry-elastic-runtime-credentials',
-        organization: 'vkari',
-        space: 'dev']) {
-		unstash 'app'
         sh "cf push vkari-eureka -p target/eureka-server-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M"
-    }
-   
 }
