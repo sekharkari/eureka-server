@@ -27,7 +27,7 @@ node {
         organization: 'vkari',
         space: 'dev']) {
 		unstash 'app'
-        sh 'cf push vkari-eureka -p target/eureka-server-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M'
+        sh "cf push vkari-eureka -p target/eureka-server-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M"
     }
    
 }
