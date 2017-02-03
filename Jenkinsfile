@@ -19,6 +19,9 @@ node {
    
    stage 'Deploy to Cloudfoundry'
    //CF push
+   		sh "pwd"
+   		sh "ls"
+   		sh "env"
         sh "cf push vkari-eureka -p target/eureka-server-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M"
    
 }
