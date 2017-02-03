@@ -25,9 +25,7 @@ node {
         cloudSpace: 'dev',
         credentialsId: 'vkari_cf_bluemix_creditentials',
         selfSigned: true,
-        resetIfExists: true)] {
-		unstash 'app'
-        sh "cf push vkari-eureka -p target/eureka-server-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M"
-    }
+        resetIfExists: true])
+    
    
 }
