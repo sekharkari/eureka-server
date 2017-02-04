@@ -19,7 +19,7 @@ node {
    
    stage 'Deploy to Cloudfoundry'
    //CF push
-   	sh 'cf login -a https://api.ng.bluemix.net -o vkari -u sekharkari@gmail.com -p Vaishnavi1 -s dev' &&
-        'cf push vkari-eureka -p target/eureka-server-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M'
+   	sh 'cf login -a https://api.ng.bluemix.net -o vkari -u sekharkari@gmail.com -p Vaishnavi1 -s dev'
+    sh 'cf push vkari-eureka -p target/eureka-server-0.0.1-SNAPSHOT.jar  -n cfdemo-eureka -m 256M'
    
 }
