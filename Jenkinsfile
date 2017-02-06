@@ -17,7 +17,7 @@ node {
    step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
    stash includes: '**/target/*.jar', name: 'app' 
    
-   state 'Unit tests'
+   stage 'Unit tests'
    sh "${mvnHome}/bin/mvn test" 
    step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
    
